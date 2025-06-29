@@ -26,6 +26,7 @@ const Hero = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSending(true);
+
     emailjs
       .sendForm(
         "service_meniodp", // Replace with your EmailJS service ID
@@ -34,13 +35,13 @@ const Hero = () => {
         "UYoaxcSkke-Lmw0Zi" // Replace with your EmailJS public key
       )
       .then(
-        (result) => {
+        (_result) => {
           formRef.current.reset();
           setIsSending(false);
           setShowFormModal(false);
           setShowThankYou(true);
         },
-        (error) => {
+        (_error) => {
           alert("Failed to send message. Please try again.");
           formRef.current.reset();
           setIsSending(false);

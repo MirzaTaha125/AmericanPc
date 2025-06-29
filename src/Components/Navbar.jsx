@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FiMenu, FiPhone, FiX, FiMail, FiChevronDown } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const menuItems = [
-  { label: "Home" },
+  { label: "Home", path: "/" },
   {
     label: "Packages",
     dropdown: ["Web Design", "Logo", "Branding", "Ecommerce"],
   },
-  { label: "About" },
-
-  { label: "Contact" },
+  { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -18,6 +18,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const location = useLocation();
 
   const handleDrawer = () => setDrawerOpen(!drawerOpen);
   const closeDrawer = () => setDrawerOpen(false);
@@ -60,7 +61,9 @@ const Navbar = () => {
         <div className="header_child navbar-flex">
           <div className="Logo_div">
             {/* Replace with your logo image or text */}
-            <span className="logo-text">LOGO</span>
+            <Link to="/" className="logo-text">
+              LOGO
+            </Link>
           </div>
           {/* Centered menu on desktop */}
           <ul className="inline-menu hide-on-mobile">
@@ -90,7 +93,16 @@ const Navbar = () => {
                   </li>
                 </div>
               ) : (
-                <li key={item.label}>{item.label}</li>
+                <li key={item.label}>
+                  <Link
+                    to={item.path}
+                    className={`nav-link ${
+                      location.pathname === item.path ? "active" : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               )
             )}
           </ul>
@@ -152,7 +164,17 @@ const Navbar = () => {
                   </div>
                 </React.Fragment>
               ) : (
-                <li key={item.label}>{item.label}</li>
+                <li key={item.label}>
+                  <Link
+                    to={item.path}
+                    className={`nav-link ${
+                      location.pathname === item.path ? "active" : ""
+                    }`}
+                    onClick={closeDrawer}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               )
             )}
           </ul>

@@ -5,8 +5,6 @@ import img1 from "../assets/Website_Portfolio/dg8ife7k2vmwltperr7f.webp";
 import img2 from "../assets/Website_Portfolio/ue5pbkstgyyxhsbuafw7.webp";
 import img3 from "../assets/Website_Portfolio/heulngkjcvew0yvxw0wo.webp";
 import img4 from "../assets/Website_Portfolio/ekvvyj8nsptbi9tedpop.webp";
-import img5 from "../assets/Website_Portfolio/vqzl4mgvv3vbuffeqzsz.webp";
-import img6 from "../assets/Website_Portfolio/erryy0icgxi5csu2cvei.webp";
 import img7 from "../assets/Website_Portfolio/evvixafk5uxh3mswenmu.webp";
 import img8 from "../assets/Website_Portfolio/mjfsez9g69mgfvzpjhtd.webp";
 import img9 from "../assets/Website_Portfolio/gmwndtlyvsiqeupvrtvy.webp";
@@ -38,7 +36,6 @@ const WORKS = {
 
 const OurWork = () => {
   const [activeTab, setActiveTab] = useState("web");
-  const [activePackageTab, setActivePackageTab] = useState("website");
   const [selectedImg, setSelectedImg] = useState(null);
   const [showImgModal, setShowImgModal] = useState(false);
 

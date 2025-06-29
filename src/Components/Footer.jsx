@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   FiMail,
   FiPhone,
@@ -14,13 +14,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <motion.footer
-      className="footer"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
-    >
+    <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
           <div className="footer-logo">
@@ -67,11 +61,10 @@ const Footer = () => {
           <h4>Company</h4>
           <ul className="footer-links">
             <li>
-              <a href="#">About Us</a>
+              <Link to="/about">About Us</Link>
             </li>
-
             <li>
-              <a href="#">Contact</a>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
@@ -105,7 +98,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 

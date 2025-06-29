@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "../Components/Navbar";
 import Hero from "../Components/Hero";
