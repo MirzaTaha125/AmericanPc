@@ -16,7 +16,7 @@ const PACKAGE_TABS = [
   { label: "SMM", key: "SMM" },
 ];
 
-const PACKAGES = {
+export const PACKAGES = {
   website: [
     {
       name: "Beginner Website",
@@ -1183,13 +1183,7 @@ const OurPackage = () => {
   };
 
   return (
-    <motion.section
-      className="packages-section"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
+    <section id="packages-section" className="ourpackage-section">
       <motion.div
         className="about-dot-row"
         style={{ justifyContent: "center", marginBottom: "1rem" }}
@@ -1198,7 +1192,7 @@ const OurPackage = () => {
         <span className="about-dot"></span>
         <span className="about-label">Our Packages</span>
       </motion.div>
-      <motion.h2 className="packages-title" variants={itemVariants}>
+      <motion.h2 className="packages-title text-center" variants={itemVariants}>
         Smart Solutions. Seamlessly Packaged.
       </motion.h2>
       <motion.div
@@ -1332,7 +1326,7 @@ const OurPackage = () => {
         </motion.div>
       )}
       <ThankYouModal isOpen={showThankYou} onClose={handleThankYouClose} />
-    </motion.section>
+    </section>
   );
 };
 

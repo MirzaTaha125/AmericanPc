@@ -8,37 +8,51 @@ const BUNDLE_PACKAGES = [
   {
     name: "Logo Design",
     features: [
-      "5 Original Logo Concepts",
-      "2 Dedicated Logo Designers",
+      "Unlimited Logo Design Concepts",
+      "8 Dedicated Designers",
       "Unlimited Revisions",
-      "All File Formats Provided",
+      "Free Icon",
+      "48–72 Business Hours Turnaround Time",
+      "Dedicated Account Manager",
     ],
-    worth: "$299",
+    worth: "$997",
   },
   {
     name: "Website Development",
     features: [
-      "5 Page Custom Website",
-      "Mobile Responsive",
-      "Contact/Query Form",
-      "Complete Deployment",
+      "8 Page Custom Website",
+      "Complete W3C Certified HTML",
+      "Google Friendly Sitemap",
+      "Google Page Speed Optimization",
+      "All Browser Compatibility",
+      "Content Management System included",
     ],
-    worth: "$799",
+    worth: "$3996",
   },
   {
     name: "Branding Kit",
     features: [
-      "Business Card Design",
-      "Letterhead Design",
-      "Envelope Design",
-      "Social Media Kit",
+      "4 Banner Design Any Size",
+      "6 Stock Photos",
+      "Tri-Fold Brochure",
+      "1 Design Concept",
+      "Product Packaging",
+      "1 Design Concept",
+      "4 Packaging Label Concepts",
+      "1 Product Catalog Design",
+      "3 Stationery Design Concepts",
+      "Free MS Letterhead",
+      "Business Cards",
+      "1 Invoice Design",
+      "Free Fax Template",
+      "Unlimited Revisions",
     ],
-    worth: "$399",
+    worth: "$1,663",
   },
 ];
 
-const ACTUAL_TOTAL = "$1497";
-const DISCOUNTED_TOTAL = "$499";
+const ACTUAL_TOTAL = "$6656";
+const DISCOUNTED_TOTAL = "$1665";
 
 const Bundle = () => {
   const [showFormModal, setShowFormModal] = useState(false);
@@ -50,6 +64,9 @@ const Bundle = () => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [slideDirection, setSlideDirection] = useState(null); // 'left' or 'right'
+  // Touch gesture state
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   // Animation variants
   const containerVariants = {
@@ -194,6 +211,28 @@ const Bundle = () => {
     }, 300);
   };
 
+  // Touch event handlers for swipe
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          handleNext(); // swipe left
+        } else {
+          handlePrev(); // swipe right
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <motion.section
       className="bundle-section"
@@ -202,8 +241,6 @@ const Bundle = () => {
         color: "#fff",
         padding: "60px 0",
         textAlign: "center",
-        paddingTop: "150px",
-        paddingBottom: "150px",
       }}
       variants={containerVariants}
       initial="hidden"
@@ -244,14 +281,17 @@ const Bundle = () => {
             style={{ position: "relative", minHeight: 340 }}
             variants={cardVariants}
             whileHover="hover"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <div
               className={`bundle-card${
                 slideDirection ? ` slide-${slideDirection}` : ""
               }`}
               style={{
-                background: "#fff",
-                color: "#101010",
+                background: "#101010",
+                color: "#fff",
                 borderRadius: 12,
                 padding: "2rem",
                 minWidth: 260,
@@ -269,17 +309,17 @@ const Bundle = () => {
                   style={{
                     fontSize: "1.3rem",
                     fontWeight: 700,
-                    color: "#101010",
+                    color: "#fff",
                   }}
                 >
                   {BUNDLE_PACKAGES[currentIdx].name}
                 </span>
                 <div
                   className="bundle-worth"
-                  style={{ marginTop: 10, color: "#666", fontSize: "1rem" }}
+                  style={{ marginTop: 10, color: "#fff", fontSize: "1rem" }}
                 >
                   Worth{" "}
-                  <span style={{ color: "#101010", fontWeight: 900 }}>
+                  <span style={{ color: "#fff", fontWeight: 900 }}>
                     {BUNDLE_PACKAGES[currentIdx].worth}
                   </span>
                 </div>
@@ -289,11 +329,16 @@ const Bundle = () => {
                 style={{
                   listStyle: "disc",
                   textAlign: "left",
-                  color: "#101010",
+                  color: "#fff",
                   fontSize: 14,
                   margin: 0,
                   paddingLeft: 20,
                   marginBottom: "2rem",
+                  maxHeight: 180,
+                  overflowY: "auto",
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "#888 #222",
+                  marginTop: 20,
                 }}
               >
                 {BUNDLE_PACKAGES[currentIdx].features.map((feature, idx) => (
@@ -303,59 +348,60 @@ const Bundle = () => {
                 ))}
               </ul>
             </div>
-            {/* Mobile Navigation Arrows */}
-            <motion.button
-              className="bundle-nav-btn bundle-nav-prev"
-              onClick={handlePrev}
+            {/* Mobile Navigation Arrows at the bottom, centered */}
+            <div
               style={{
-                position: "absolute",
-                left: -20,
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "rgba(255,255,255,0.9)",
-                border: "none",
-                borderRadius: "50%",
-                width: 40,
-                height: 40,
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
-                color: "#101010",
-                cursor: "pointer",
-                zIndex: 10,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                gap: 24,
+                marginTop: 16,
               }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
             >
-              ←
-            </motion.button>
-            <motion.button
-              className="bundle-nav-btn bundle-nav-next"
-              onClick={handleNext}
-              style={{
-                position: "absolute",
-                right: -20,
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "rgba(255,255,255,0.9)",
-                border: "none",
-                borderRadius: "50%",
-                width: 40,
-                height: 40,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#101010",
-                cursor: "pointer",
-                zIndex: 10,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              →
-            </motion.button>
+              <motion.button
+                className="bundle-nav-btn bundle-nav-prev"
+                onClick={handlePrev}
+                style={{
+                  background: "#fff",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 40,
+                  height: 40,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#101010",
+                  cursor: "pointer",
+                  zIndex: 10,
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                ←
+              </motion.button>
+              <motion.button
+                className="bundle-nav-btn bundle-nav-next"
+                onClick={handleNext}
+                style={{
+                  background: "#fff",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 40,
+                  height: 40,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#101010",
+                  cursor: "pointer",
+                  zIndex: 10,
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                →
+              </motion.button>
+            </div>
           </motion.div>
         ) : (
           BUNDLE_PACKAGES.map((pkg, idx) => (
@@ -408,6 +454,10 @@ const Bundle = () => {
                   margin: 0,
                   paddingLeft: 20,
                   marginBottom: "2rem",
+                  maxHeight: 180,
+                  overflowY: "auto",
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "#888 #222",
                 }}
               >
                 {pkg.features.map((feature, idx) => (

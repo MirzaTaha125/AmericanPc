@@ -89,7 +89,16 @@ const Hero = () => {
             <div className="col-lg-6 col-md-12 heading_div fade-in-up">
               <div className="typing-container">
                 <h1 className="main_heading typing-cursor">
-                  {displayText}
+                  {displayText.includes("Elevate Your Brand") ? (
+                    <>
+                      {displayText.replace("Elevate Your Brand", "")}
+                      <span className="blink-animation">
+                        Elevate Your Brand
+                      </span>
+                    </>
+                  ) : (
+                    displayText
+                  )}
                   <span className="cursor">|</span>
                 </h1>
               </div>
@@ -99,9 +108,18 @@ const Hero = () => {
               </p>
               <div className="btns_div fade-in-up">
                 <div className="btn btn_1" onClick={handleGetQuote}>
-                  Get Quote
+                  Get a Quote
                 </div>
-                <div className="btn btn_2"> View Packages </div>
+                <div
+                  className="btn btn_2"
+                  onClick={() => {
+                    const el = document.getElementById("packages-section");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  {" "}
+                  View Packages{" "}
+                </div>
               </div>
             </div>
             <div className="col-lg-6 col-md-12 div_form_main text-center">

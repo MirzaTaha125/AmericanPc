@@ -5,7 +5,10 @@ import Hero from "../Components/Hero";
 import About from "../Components/About";
 import OurWork from "../Components/OurWork";
 import Bundle from "../Components/Bundle";
+import Testimonial from "../Components/Testimonial";
 import Footer from "../Components/Footer";
+import OurPackage from "../Components/OurPackage";
+
 
 const Home = () => {
   return (
@@ -23,7 +26,9 @@ const Home = () => {
       <Hero />
       <About />
       <OurWork />
+      <OurPackage />
       <Bundle />
+      <Testimonial />
       <Footer />
     </motion.div>
   );

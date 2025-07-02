@@ -9,6 +9,17 @@ import "./App.css";
 import Home_Page from "./Pages/Home";
 import AboutUs from "./Pages/AboutUs";
 import ContactUs from "./Pages/ContactUs";
+import WebDevelopment from "./Pages/WebDevelopment";
+import Logo from "./Pages/Logo";
+import Branding from "./Pages/Branding";
+import Ecommerce from "./Pages/Ecommerce";
+import WebDevelopment_Services from "./Pages/WebDevelopment_Services";
+import Portfolio from "./Pages/Portfolio";
+import Logo_service from "./Pages/Logo_Services";
+import Branding_Services from "./Pages/Branding_Services";
+import Ecommerce_Services from "./Pages/Ecommerce_Services";
+
+// import Tawkto from "./Components/Tawkto";
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -72,16 +83,32 @@ const NotFound = () => {
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="background-light-topright"></div>
-      <Routes>
-        <Route path="/" element={<Home_Page />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <>
+      {/* <Tawkto /> */}
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home_Page />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/web-development" element={<WebDevelopment />} />
+          <Route path="/logo" element={<Logo />} />
+          <Route path="/branding" element={<Branding />} />
+          <Route path="/ecommerce" element={<Ecommerce />} />
+          <Route path="/potfolio" element={<Portfolio />} />
+          <Route path="/logo-service" element={<Logo_service />} />
+          <Route path="/branding-service" element={<Branding_Services />} />
+          <Route path="/ecommerce-service" element={<Ecommerce_Services />} />
+
+          <Route
+            path="/web-development-service"
+            element={<WebDevelopment_Services />}
+          />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
